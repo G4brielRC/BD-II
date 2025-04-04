@@ -1,0 +1,33 @@
+CREATE DATABASE IF NOT EXISTS Conteudo_Intermedio;
+
+USE Conteudo_Intermedio;
+
+CREATE TABLE teste_01 (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50),
+    idade INT,
+    id_curso INT,
+    FOREIGN KEY (id_curso) REFERENCES teste_02(id)
+    );
+    
+CREATE TABLE teste_02 (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_curso VARCHAR(50),
+    periodo VARCHAR(20)
+    );
+    
+INSERT INTO teste_02 (nome_curso, periodo) VALUES
+	('ADS', 'Noturno'),
+  ('LOG', 'Diurno'),
+  ('ADM', 'Tarde');
+    
+INSERT INTO teste_01 (nome, idade, id_curso) VALUES
+		('Gabriel', 17, 1),
+      ('Pedro', 25, 3),
+      ('Caio', 20, 2);
+        
+SELECT * FROM teste_02;
+
+SELECT * FROM teste_01;
+        
+    
