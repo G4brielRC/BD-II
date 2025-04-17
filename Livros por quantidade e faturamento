@@ -1,0 +1,34 @@
+/*------LIVROS MAIS VENDIDOS--------*/
+
+SELECT lvr.titulo, vnd.quantidade AS total_vendido
+FROM vendas vnd
+JOIN livros lvr ON vnd.livro_id = lvr.id
+GROUP BY lvr.titulo
+ORDER BY total_vendido DESC;
+ 
+ /*------LIVROS QUE MAIS FATURARAM----------*/
+ 
+SELECT lvr.titulo, (vnd.preco_unitario * vnd.quantidade) AS total_faturamento
+FROM vendas vnd
+JOIN livros lvr ON vnd.livro_id = lvr.id
+GROUP BY lvr.titulo
+ORDER BY total_faturamento DESC;
+
+
+/*--------LIVROS MAIS VENDIDOS DE 2023----------*/
+
+SELECT lvr.titulo, vnd.quantidade AS quantidade,  data_venda AS data_da_venda
+FROM vendas vnd
+JOIN livros lvr ON vnd.livro_id = lvr.id
+WHERE data_venda BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY lvr.titulo
+ORDER BY quantidade DESC;
+
+/*---------LIVROS QUE MAIS FATURARAM EM 2023----------*/
+
+SELECT lvr.titulo, (vnd.preco_unitario * vnd.quantidade) AS total_faturamento, data_venda AS data_da_venda
+FROM vendas vnd
+JOIN livros lvr ON vnd.livro_id = lvr.id
+WHERE data_venda BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY lvr.titulo
+ORDER BY total_faturamento DESC;
