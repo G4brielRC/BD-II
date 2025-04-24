@@ -1,25 +1,21 @@
 -- Cria o banco de dados
 CREATE DATABASE IF NOT EXISTS livraria;
 USE livraria;
-
+ 
 -- Cria tabela de Autores
 CREATE TABLE autores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     nacionalidade VARCHAR(50)
 );
-
-SELECT * FROM autores;
-
+ 
 -- Cria tabela de Editoras
 CREATE TABLE editoras (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     pais VARCHAR(50)
 );
-
-SELECT * FROM editoras;
-
+ 
 -- Cria tabela de Livros
 CREATE TABLE livros (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,9 +27,7 @@ CREATE TABLE livros (
     FOREIGN KEY (autor_id) REFERENCES autores(id),
     FOREIGN KEY (editora_id) REFERENCES editoras(id)
 );
-
-SELECT * FROM livros;
-
+ 
 -- Cria tabela de Vendas
 CREATE TABLE vendas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,7 +37,7 @@ CREATE TABLE vendas (
     preco_unitario DECIMAL(10,2),
     FOREIGN KEY (livro_id) REFERENCES livros(id)
 );
-
+ 
 -- Insere Autores
 INSERT INTO autores (nome, nacionalidade) VALUES
 ('Machado de Assis', 'Brasileira'),
@@ -56,7 +50,7 @@ INSERT INTO autores (nome, nacionalidade) VALUES
 ('Stephen King', 'Americana'),
 ('J.R.R. Tolkien', 'Britânica'),
 ('Toni Morrison', 'Americana');
-
+ 
 -- Insere Editoras
 INSERT INTO editoras (nome, pais) VALUES
 ('Companhia das Letras', 'Brasil'),
@@ -64,7 +58,7 @@ INSERT INTO editoras (nome, pais) VALUES
 ('Penguin Random House', 'EUA'),
 ('HarperCollins', 'Reino Unido'),
 ('Editora 34', 'Brasil');
-
+ 
 -- Insere Livros (20 livros)
 INSERT INTO livros (titulo, autor_id, editora_id, ano_publicacao, preco) VALUES
 ('Dom Casmurro', 1, 1, 1899, 45.90),
@@ -87,7 +81,7 @@ INSERT INTO livros (titulo, autor_id, editora_id, ano_publicacao, preco) VALUES
 ('O Conto da Aia', 10, 3, 1985, 62.00),
 ('O Estrangeiro', 6, 1, 1942, 40.00),
 ('Orgulho e Preconceito', 5, 4, 1813, 37.90);
-
+ 
 -- Insere Vendas (20 vendas)
 INSERT INTO vendas (livro_id, data_venda, quantidade, preco_unitario) VALUES
 (1, '2023-01-15', 2, 45.90),
@@ -110,7 +104,7 @@ INSERT INTO vendas (livro_id, data_venda, quantidade, preco_unitario) VALUES
 (18, '2024-06-10', 2, 62.00),
 (14, '2024-07-15', 1, 85.00),
 (20, '2024-08-20', 4, 37.90);
-
+ 
 -- Cria índices para melhorar performance
 CREATE INDEX idx_autor ON livros(autor_id);
 CREATE INDEX idx_editora ON livros(editora_id);
@@ -157,8 +151,3 @@ FROM livros lvr
 JOIN autores aut ON lvr.autor_id = aut.id
 WHERE aut.nacionalidade = 'Britânica'
 ORDER BY lvr.preco DESC;
-
-
-
-
-
