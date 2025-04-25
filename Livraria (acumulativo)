@@ -186,3 +186,28 @@ JOIN livros lvr ON vnd.livro_id = lvr.id
 WHERE data_venda BETWEEN '2023-01-01' AND '2023-12-31'
 GROUP BY lvr.titulo
 ORDER BY total_faturamento DESC;
+
+
+/*------------SELECIONE TODOS OS LIVROS DE AUTORES BRITANICOS EM QUE O NUMERO TOTAL DE VENDAS ------------------
+--------------SEJA DE 2 OU MAIS LIVROS ONDE O PREÇO UNITARIO SEJA INFERIOR A R$50, EM 2023 ----------------------*/
+
+SELECT
+ lvr.titulo AS Obra,
+ aut.nome AS Autor,
+ vnd.preco_unitario AS Preço,
+ vnd.quantidade AS Quantidade
+ 
+FROM livros lvr
+
+JOIN autores aut ON lvr.autor_id = aut.id
+JOIN editoras edt ON lvr.editoras_id = edt.id
+JOIN vendas vnd ON  lvr.id = vnd.livros_id
+
+WHERE aut.nacionalidade = 'Britânica'
+AND vnd.preco_unitario < 50.00
+AND vnd.data_venda BETWEEN '2023-01-01' AND '2023-12-31'
+
+GROUP BY lvr.titulo, aut, nome, vnd.preco_unitario
+
+HAVING  SUM(vnd.quantidade) >= 2;
+
